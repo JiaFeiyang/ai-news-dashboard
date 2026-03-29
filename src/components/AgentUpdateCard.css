@@ -1,15 +1,18 @@
 .agent-update-card {
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  padding: 16px;
-  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
   cursor: pointer;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  border: 1px solid #eaeaea;
+  position: relative;
 }
 
 .agent-update-card:hover {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
 }
 
 .agent-update-header {
@@ -68,10 +71,28 @@
 
 .update-content {
   color: #555;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .update-content p {
   margin: 0;
   font-size: 0.95em;
+}
+
+/* Animation for status indicator */
+.status-indicator.active {
+  background-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.status-indicator.warning {
+  box-shadow: 0 0 5px rgba(255, 152, 0, 0.5);
+}
+
+.status-indicator.inactive {
+  box-shadow: 0 0 5px rgba(244, 67, 54, 0.5);
+}
+
+.status-indicator.offline {
+  box-shadow: 0 0 5px rgba(158, 158, 158, 0.5);
 }

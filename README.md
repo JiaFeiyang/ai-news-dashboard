@@ -1,70 +1,236 @@
-# Getting Started with Create React App
+# AI News Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A comprehensive dashboard for tracking AI news and updates from various social platforms and AI agent activities.
 
-## Available Scripts
+## Table of Contents
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [API Endpoints](#api-endpoints)
+- [Configuration](#configuration)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
 
-In the project directory, you can run:
+## Features
+- Real-time AI news feed from multiple social platforms (Twitter, Reddit, Hacker News)
+- AI agent activity monitoring with status indicators
+- Content filtering by platform, language, and date range
+- Responsive design for desktop and mobile devices
+- Performance optimized with React hooks and efficient state management
+- Security features including rate limiting and helmet protection
 
-### `npm start`
+## Technologies Used
+- **Frontend**: React 19, JavaScript ES6+, CSS3
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB with Mongoose ODM
+- **Testing**: Jest, React Testing Library
+- **Development**: Nodemon, Concurrently
+- **Security**: Helmet, CORS, Rate Limiter
+- **UI Components**: Custom built with CSS Flexbox/Grid
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
+- MongoDB (local or cloud instance)
 
-### `npm test`
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/ai-news-dashboard.git
+   cd ai-news-dashboard
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+3. Create a `.env` file in the root directory with the following variables:
+   ```env
+   PORT=5000
+   MONGODB_URI=mongodb://localhost:27017/ai-news-dashboard
+   CORS_ORIGIN=http://localhost:3000
+   RATE_LIMIT_WINDOW_MS=15 * 60 * 1000
+   RATE_LIMIT_MAX_REQUESTS=100
+   API_KEY=your_api_key_here
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Start the development servers:
+   ```bash
+   npm run dev
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Usage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Development
+To run both client and server in development mode:
+```bash
+npm run dev
+```
 
-### `npm run eject`
+To run only the backend server:
+```bash
+npm run dev:server
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To run only the frontend client:
+```bash
+npm run dev:client
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Production
+To build the application for production:
+```bash
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To start the production server:
+```bash
+npm run server
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Testing
+To run the test suite:
+```bash
+npm test
+```
 
-## Learn More
+### Formatting and Linting
+To format the code:
+```bash
+npm run format
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To check linting issues:
+```bash
+npm run lint
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+To fix linting issues automatically:
+```bash
+npm run lint:fix
+```
 
 ### Deployment
+To analyze the bundle size:
+```bash
+npm run analyze
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Project Structure
+```
+ai-news-dashboard/
+├── public/                 # Public assets
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+├── src/                    # Frontend source code
+│   ├── components/         # Reusable React components
+│   │   ├── SocialContentCard.js     # Social media content display
+│   │   ├── SocialContentCard.css    # Styling for social cards
+│   │   ├── AgentUpdateCard.js       # AI agent update display
+│   │   ├── AgentUpdateCard.css      # Styling for agent updates
+│   │   ├── AgentUpdatesFeed.js      # Feed of agent updates
+│   │   └── AgentUpdatesFeed.css     # Styling for agent feed
+│   ├── hooks/              # Custom React hooks
+│   │   ├── useSocialData.js         # Hook for social data
+│   │   └── useAgentUpdates.js       # Hook for agent updates
+│   ├── services/           # API services
+│   │   └── api.js          # API endpoints
+│   ├── utils/              # Utility functions
+│   │   └── dateUtils.js    # Date utilities
+│   ├── App.js              # Main application component
+│   ├── App.css             # Global application styles
+│   └── index.js            # Application entry point
+├── server/                 # Backend source code
+│   ├── app.js              # Main Express application
+│   ├── routes/             # API routes
+│   │   ├── socialRoutes.js # Social media endpoints
+│   │   └── agentRoutes.js  # AI agent endpoints
+│   ├── controllers/        # Route controllers
+│   │   ├── socialController.js  # Social media handlers
+│   │   └── agentController.js   # AI agent handlers
+│   ├── models/             # Database models
+│   │   ├── SocialPost.js   # Social post model
+│   │   └── AgentUpdate.js  # Agent update model
+│   └── utils/              # Backend utilities
+│       └── validation.js   # Validation helpers
+├── .env.example           # Example environment variables
+├── .gitignore             # Git ignored files
+├── package.json           # Project dependencies and scripts
+├── README.md              # Project documentation
+└── ...
+```
 
-### `npm run build` fails to minify
+## API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Social Media Data
+- `GET /api/social/posts` - Get social media posts with filtering options
+  - Query params: `platform`, `language`, `startDate`, `endDate`, `limit`, `page`
+
+### Agent Updates
+- `GET /api/agents/updates` - Get AI agent updates with filtering options
+  - Query params: `status`, `agentName`, `startDate`, `endDate`, `limit`, `page`
+
+## Configuration
+
+### Environment Variables
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `PORT` | Server port | 5000 |
+| `MONGODB_URI` | MongoDB connection string | mongodb://localhost:27017/ai-news-dashboard |
+| `CORS_ORIGIN` | Allowed origin for CORS | http://localhost:3000 |
+| `RATE_LIMIT_WINDOW_MS` | Time window for rate limiting | 900000 (15 minutes) |
+| `RATE_LIMIT_MAX_REQUESTS` | Max requests per IP in rate limit window | 100 |
+| `API_KEY` | API key for protected endpoints | (none) |
+
+## Deployment
+
+### Deploy to Heroku
+1. Login to Heroku CLI:
+   ```bash
+   heroku login
+   heroku container:login
+   ```
+
+2. Create a Heroku app:
+   ```bash
+   heroku create your-app-name
+   ```
+
+3. Set environment variables:
+   ```bash
+   heroku config:set MONGODB_URI=your_mongo_uri
+   heroku config:set API_KEY=your_api_key
+   # ... other environment variables
+   ```
+
+4. Deploy:
+   ```bash
+   git push heroku main
+   ```
+
+### Deploy to Netlify/Vercel (Frontend Only)
+1. Build the application:
+   ```bash
+   npm run build
+   ```
+
+2. Deploy the `build` folder to Netlify or Vercel following their documentation.
+
+## Contributing
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Add tests if applicable
+5. Run tests (`npm test`)
+6. Commit your changes (`git commit -m 'Add amazing feature'`)
+7. Push to the branch (`git push origin feature/amazing-feature`)
+8. Open a Pull Request
+
+## License
+This project is licensed under the MIT License.

@@ -7,13 +7,13 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^13.5.0",
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
     "axios": "^1.6.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "mongoose": "^7.5.0",
-    "helmet": "^7.0.0",
+    "express": "^4.18.2",
     "express-rate-limit": "^6.10.0",
+    "helmet": "^7.0.0",
+    "mongoose": "^7.5.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-scripts": "5.0.1",
@@ -25,7 +25,15 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node server/app.js",
-    "dev": "nodemon server/app.js"
+    "dev": "concurrently \"npm run server\" \"react-scripts start\"",
+    "dev:server": "nodemon server/app.js",
+    "dev:client": "react-scripts start",
+    "lint": "eslint src/ --ext .js,.jsx",
+    "lint:fix": "eslint src/ --ext .js,.jsx --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx,json,css,md}\"",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +52,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "gh-pages": "^6.3.0",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.1",
+    "source-map-explorer": "^2.5.3"
   }
 }
