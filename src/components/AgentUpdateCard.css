@@ -1,0 +1,77 @@
+.agent-update-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.agent-update-card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.agent-update-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.agent-name {
+  margin: 0;
+  font-size: 1.1em;
+  color: #333;
+  font-weight: bold;
+}
+
+.update-timestamp {
+  font-size: 0.85em;
+  color: #888;
+}
+
+.agent-status {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.status-indicator.active {
+  background-color: #4caf50;
+}
+
+.status-indicator.inactive {
+  background-color: #f44336;
+}
+
+.status-indicator.warning {
+  background-color: #ff9800;
+}
+
+.status-indicator.offline {
+  background-color: #9e9e9e;
+}
+
+.status-text {
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.update-content {
+  color: #555;
+  line-height: 1.5;
+}
+
+.update-content p {
+  margin: 0;
+  font-size: 0.95em;
+}
