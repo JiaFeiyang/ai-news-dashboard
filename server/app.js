@@ -10,6 +10,9 @@ require('dotenv').config();
 // Import configuration
 const config = require('./config');
 
+// Import utilities
+const scheduler = require('./utils/scheduler');
+
 // Initialize Express app
 const app = express();
 
@@ -31,7 +34,14 @@ app.use(limiter);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+// Import routes
+const socialContentRoutes = require('./routes/socialContent');
+const agentUpdatesRoutes = require('./routes/agentUpdates');
+
 // Routes
+app.use('/api/social-content', socialContentRoutes);
+app.use('/api/agent-updates', agentUpdatesRoutes);
+
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
@@ -57,6 +67,9 @@ mongoose.connect(config.MONGODB_URI, {
 .then(() => {
   console.log('Connected to MongoDB');
 
+  // Initialize scheduled tasks after database connection
+  initializeScheduledTasks();
+
   const PORT = process.env.PORT || config.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
@@ -66,5 +79,19 @@ mongoose.connect(config.MONGODB_URI, {
 .catch(err => {
   console.error('Database connection error:', err);
 });
+
+/**
+ * Initialize scheduled tasks for the application
+ */
+function initializeScheduledTasks() {
+  console.log('Initializing scheduled tasks...');
+
+  // Example task: Health check logging
+  scheduler.scheduleTask('health-check-logger', async () => {
+    console.log(`Health check at ${new Date().toISOString()}: Server running normally`);
+  }, 300000); // Every 5 minutes
+
+  console.log('Scheduled tasks initialized');
+}
 
 module.exports = app;
