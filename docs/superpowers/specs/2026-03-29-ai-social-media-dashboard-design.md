@@ -5,6 +5,7 @@
 
 ## 设计目标
 - 展示来自不同社交媒体平台的AI相关内容
+- 提供Claude Code、codex、openclaw、Antigravity智能体的版本更新记录
 - 提供清晰的视觉层次和易读的布局
 - 支持实时内容刷新
 - 提供筛选和排序功能
@@ -42,6 +43,14 @@ App
 - 互动数据（点赞数、转发数、评论数）
 - 原文链接按钮
 
+#### AgentUpdates组件
+- 智能体名称标识（Claude Code、codex、openclaw、Antigravity）
+- 版本号显示
+- 更新时间
+- 更新内容描述
+- 更新类型标签（功能新增、错误修复、性能改进等）
+- 查看详情链接
+
 #### Header组件
 - 看板标题
 - 刷新按钮
@@ -50,20 +59,26 @@ App
 #### Filters组件
 - 时间范围筛选（最近1小时、6小时、24小时等）
 - 平台来源筛选
+- 智能体选择筛选
 - 关键词搜索框
 - 排序选项（最新、最热、最多互动）
 
 ## 数据流设计
-1. 应用启动时加载最新内容
-2. 定时轮询API获取新内容
-3. 用户操作（筛选、排序）触发条件查询
-4. 点击加载更多加载历史内容
+1. 应用启动时加载最新社交媒体内容和智能体更新记录
+2. 定时轮询API获取新社交媒体内容（每分钟）
+3. 定时获取智能体版本更新（每5小时）
+4. 用户操作（筛选、排序）触发条件查询
+5. 点击加载更多加载历史内容
 
 ## API接口设计
 - `/api/social-content` - 获取社交媒体内容列表
 - 参数：limit, offset, platform, time_range, sort_order, search_term
-- `/api/social-content/refresh` - 强制刷新内容
-- `/api/social-content/stats` - 获取统计信息
+- `/api/social-content/refresh` - 强制刷新社交媒体内容
+- `/api/agent-updates` - 获取智能体版本更新记录
+- 参数：agents (Claude Code|codex|openclaw|Antigravity), time_range, limit
+- `/api/agent-updates/refresh` - 强制检查智能体更新
+- `/api/social-content/stats` - 获取社交媒体统计信息
+- `/api/agent-updates/stats` - 获取智能体更新统计信息
 
 ## 视觉设计
 ### 颜色方案
@@ -84,8 +99,9 @@ App
 ## 性能优化
 - 虚拟滚动处理大量卡片
 - 图片懒加载
-- API响应缓存
+- API响应缓存（社交媒体内容短期缓存，智能体更新长期缓存）
 - 防抖处理用户输入
+- 分别设置不同内容类型的刷新频率（社交媒体高频，智能体更新低频）
 
 ## 测试策略
 - 单元测试：React组件、工具函数
